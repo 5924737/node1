@@ -8,7 +8,7 @@ RUN apt-get -y update \
 && apt-get install -y php-fpm \
 && apt-get install -y git \
 && apt-get install -y nano \
-&& git clone https://github.com/5924737/dell.git /var/www/site/ \
+&& git clone https://github.com/5924737/dell.git /var/www/node/ \
 && apt-get install -y mc 
 
 #CMD mkdir 
