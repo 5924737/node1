@@ -8,11 +8,11 @@ RUN apt-get -y update \
 && apt-get install -y php-fpm \
 && apt-get install -y git \
 && apt-get install -y nano \
-&& git clone https://github.com/5924737/dell.git /var/www/node/ \
+&& git clone https://github.com/5924737/node1.git /var/www/node/ \
 && apt-get install -y mc 
 
-#CMD mkdir 
+#CMD mkdir
 #COPY nginx.conf /etc/nginx/nginx.conf
-#COPY sites-available /etc/nginx/sites-available
-#COPY sites-enabled /etc/nginx/sites-enabled
+&& COPY /nginx/sites-available /etc/nginx/sites-available \
+&& COPY /nginx/sites-enabled /etc/nginx/sites-enabled \
 #COPY site /var/www/site
