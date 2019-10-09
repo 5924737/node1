@@ -6,7 +6,7 @@ RUN apt-get -y update \
 && apt-get -y dist-upgrade \
 && apt-get install -y git \
 && apt-get install -y nginx \
-#&& apt-get install -y php-fpm \
+&& apt-get install -y php-fpm \
 
 && apt-get install -y nano \
 #&& git clone https://github.com/5924737/node1.git /var/www/node/
