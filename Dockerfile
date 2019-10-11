@@ -18,7 +18,7 @@ ADD id_rsa /root/.ssh/id_rsa
 RUN chmod 700 /root/.ssh/id_rsa
 RUN echo "Host github.com\n\tStrictHostKeyChecking no\n" >> /root/.ssh/config
 
-WORKDIR /var/www/node
+WORKDIR /var/www/html
 RUN git clone git@github.com:5924737/node1.git
 #RUN echo 'Hi, I am in your container'>/var/www/html/index.html
 EXPOSE 80
