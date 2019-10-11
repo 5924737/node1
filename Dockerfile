@@ -1,4 +1,4 @@
-# Version: 0.0.1
+# Version: 0.1
 FROM ubuntu:18.04
 MAINTAINER Kir <5924737@gmail.com>
 
@@ -6,12 +6,20 @@ RUN apt-get update && apt-get install -y tzdata
 ENV TZ=Europe/Kiev
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
+RUN apt-get install -y ssh
 RUN apt-get install -y git
 RUN apt-get install -y nano
 RUN apt-get install -y nginx
 RUN apt-get install -y php7.2 php7.2-common php7.2-cli php7.2-fpm php7.2-gd php7.2-mysql php7.2-curl php7.2-simplexml php7.2-zip
+#WORKDIR /home/kir/.ssh/
+
+RUN mkdir -p /root/.ssh
+ADD id_rsa /root/.ssh/id_rsa
+RUN chmod 700 /root/.ssh/id_rsa
+RUN echo "Host github.com\n\tStrictHostKeyChecking no\n" >> /root/.ssh/config
+
 WORKDIR /var/www/node
-RUN git clone git clone git@github.com:5924737/node1.git
+RUN git clone git@github.com:5924737/node1.git
 #RUN echo 'Hi, I am in your container'>/var/www/html/index.html
 EXPOSE 80
 CMD service nginx start && tail -F /var/log/mysql/error.log
