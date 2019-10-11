@@ -18,18 +18,19 @@ ADD image/id_rsa /root/.ssh/id_rsa
 RUN chmod 700 /root/.ssh/id_rsa
 RUN echo "Host github.com\n\tStrictHostKeyChecking no\n" >> /root/.ssh/config
 
-WORKDIR /var/www/node1
+WORKDIR /var/www/html
 RUN git clone git@github.com:5924737/node1.git .
 
 # Remove SSH keys
 RUN rm -rf /root/.ssh/
-RUN rm -rf /var/www/node1/image
+RUN rm -rf /var/www/html/image
 
 ADD image/sites-available /etc/nginx/sites-available
 ADD image/sites-enabled /etc/nginx/sites-enabled
 #RUN echo 'Hi, I am in your container'>/var/www/html/index.html
 EXPOSE 80
-CMD service nginx start && tail -F /var/log/mysql/error.log
+CMD service nginx start
+#&& tail -F /var/log/mysql/error.log
 #ENTRYPOINT service nginx restart && bash
 #CMD /bin/bash /etc/init.d/nginx start
 #CMD /bin/bash service nginx start
