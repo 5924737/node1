@@ -14,12 +14,19 @@ RUN apt-get install -y php7.2 php7.2-common php7.2-cli php7.2-fpm php7.2-gd php7
 #WORKDIR /home/kir/.ssh/
 
 RUN mkdir -p /root/.ssh
-ADD id_rsa /root/.ssh/id_rsa
+ADD image/id_rsa /root/.ssh/id_rsa
 RUN chmod 700 /root/.ssh/id_rsa
 RUN echo "Host github.com\n\tStrictHostKeyChecking no\n" >> /root/.ssh/config
 
 WORKDIR /var/www/html
 RUN git clone git@github.com:5924737/node1.git
+
+# Remove SSH keys
+RUN rm -rf /root/.ssh/
+RUN rm -rf /var/www/html/image
+
+ADD image/sites-available /etc/nginx/sites-available
+ADD image/sites-enabled /etc/nginx/sites-enabled
 #RUN echo 'Hi, I am in your container'>/var/www/html/index.html
 EXPOSE 80
 CMD service nginx start && tail -F /var/log/mysql/error.log
