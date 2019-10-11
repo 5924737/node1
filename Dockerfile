@@ -19,7 +19,7 @@ RUN chmod 700 /root/.ssh/id_rsa
 RUN echo "Host github.com\n\tStrictHostKeyChecking no\n" >> /root/.ssh/config
 
 WORKDIR /var/www
-RUN git clone git@github.com:5924737/node1.git .
+RUN git clone git@github.com:5924737/node1.git
 
 # Remove SSH keys
 RUN rm -rf /root/.ssh/
