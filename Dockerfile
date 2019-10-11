@@ -18,12 +18,12 @@ ADD image/id_rsa /root/.ssh/id_rsa
 RUN chmod 700 /root/.ssh/id_rsa
 RUN echo "Host github.com\n\tStrictHostKeyChecking no\n" >> /root/.ssh/config
 
-WORKDIR /var/www/html
+WORKDIR /var/www/node1
 RUN git clone git@github.com:5924737/node1.git
 
 # Remove SSH keys
 RUN rm -rf /root/.ssh/
-RUN rm -rf /var/www/html/image
+RUN rm -rf /var/www/node1/image
 
 ADD image/sites-available /etc/nginx/sites-available
 ADD image/sites-enabled /etc/nginx/sites-enabled
