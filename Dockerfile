@@ -22,7 +22,8 @@ RUN echo "Host github.com\n\tStrictHostKeyChecking no\n" >> /root/.ssh/config
 
 WORKDIR /var/www/min
 RUN git clone git@github.com:5924737/node1.git /var/www/min
-RUN chmod 777 /var/www/min
+RUN chmod -R 777 /var/www/min/web
+
 
 # Remove SSH keys
 RUN rm -rf /root/.ssh/
@@ -34,8 +35,7 @@ ADD image/sites-enabled /etc/nginx/sites-enabled
 #RUN echo 'Hi, I am in your container'>/var/www/html/index.html
 
 EXPOSE 80
-CMD service nginx start
-#&& tail -F /var/log/mysql/error.log
+CMD service nginx start && service php7.2-fpm start && tail -F /var/log/mysql/error.log
 #ENTRYPOINT service nginx restart && bash
 #CMD /bin/bash /etc/init.d/nginx start
 #CMD /bin/bash service nginx start
