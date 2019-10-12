@@ -3,10 +3,10 @@ server {
         charset utf-8;
         client_max_body_size 128M;
 
-        listen 80; ## listen for ipv4
-        #listen [::]:80 default_server ipv6only=on; ## listen for ipv6
+        listen 80 default_server;
+	    listen [::]:80 default_server;
 
-        server_name min.llan.xyz;
+        server_name _;
         root        /var/www/min/web/;
         index       index.php;
 
@@ -16,11 +16,13 @@ server {
         location / {
             # Redirect everything that isn't a real file to index.php
             try_files $uri $uri/ /index.php$is_args$args;
+            auth_basic            "closed site";
+            auth_basic_user_file  /etc/nginx/htpasswd;
         }
 
         # uncomment to avoid processing of calls to non-existing static files by Yii
         #location ~ \.(js|css|png|jpg|gif|swf|ico|pdf|mov|fla|zip|rar)$ {
-	location ~* ^.+\.(js|css|ttf|jpg|jpeg|gif|png|ico|zip|tgz|gz|rar|tar|bz2|pdf|doc|docx|rtf|xls|ppt|mp3)$ {
+	     location ~* ^.+\.(js|css|ttf|jpg|jpeg|gif|png|ico|zip|tgz|gz|rar|tar|bz2|pdf|doc|docx|rtf|xls|ppt|mp3)$ {
             try_files $uri =404;
         }
         #error_page 404 /404.html;
@@ -37,7 +39,7 @@ server {
             fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
             try_files $uri =404;
         }
-    
+
         location ~* /\. {
             deny all;
         }

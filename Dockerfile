@@ -2,40 +2,29 @@
 FROM ubuntu:18.04
 MAINTAINER Kir <5924737@gmail.com>
 
-RUN apt-get update && apt-get install -y tzdata
-ENV TZ=Europe/Kiev
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-
-RUN apt-get install -y php-fpm
-
-RUN apt-get install -y ssh
-RUN apt-get install -y git
-RUN apt-get install -y nano
-RUN apt-get install -y nginx
-
-#WORKDIR /home/kir/.ssh/
-
-RUN mkdir -p /root/.ssh
+#ENV TZ=Europe/Kiev
 ADD image/id_rsa /root/.ssh/id_rsa
-RUN chmod 700 /root/.ssh/id_rsa
-RUN echo "Host github.com\n\tStrictHostKeyChecking no\n" >> /root/.ssh/config
 
-WORKDIR /var/www/min
-RUN git clone git@github.com:5924737/node1.git /var/www/min
-RUN chmod -R 777 /var/www/min/web
+RUN apt-get update && apt-get install -y tzdata \
+&& ln -snf /usr/share/zoneinfo/Europe/Kiev /etc/localtime \
+&& echo Europe/Kiev > /etc/timezone \
+&& apt-get install -y nginx \
+&& apt-get install -y php7.2-fpm \
+&& apt-get install -y git \
+&& mkdir -p /root/.ssh \
+&& chmod 700 /root/.ssh/id_rsa \
+&& echo "Host github.com\n\tStrictHostKeyChecking no\n" >> /root/.ssh/config \
+&& git clone git@github.com:5924737/node1.git /var/www/min \
+&& chmod -R 777 /var/www/min/web
+#RUN apt-get install -y nano
 
+ADD image/default /etc/nginx/sites-available/default
+ADD image/htpasswd /etc/nginx/htpasswd
 
-# Remove SSH keys
-RUN rm -rf /root/.ssh/
-RUN rm -rf /var/www/min/image
-
-ADD image/sites-available /etc/nginx/sites-available
-ADD image/sites-enabled /etc/nginx/sites-enabled
-
-#RUN echo 'Hi, I am in your container'>/var/www/html/index.html
+RUN rm -rf /root/.ssh/ \
+&& rm -rf /var/www/min/image \
+&& rm -f /var/www/min/Dockerfile
 
 EXPOSE 80
+WORKDIR /var/www/min
 CMD service nginx start && service php7.2-fpm start && tail -F /var/log/mysql/error.log
-#ENTRYPOINT service nginx restart && bash
-#CMD /bin/bash /etc/init.d/nginx start
-#CMD /bin/bash service nginx start
