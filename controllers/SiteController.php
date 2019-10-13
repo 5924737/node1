@@ -61,6 +61,11 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+//        $post = Yii::$app->dbl->createCommand('CREATE table test (id, string, ctime)')->execute();
+//        $post = Yii::$app->dbl->createCommand("INSERT INTO test VALUES('1', 'string', 'ctime')")->execute();
+        $post = Yii::$app->dbl->createCommand("SELECT * FROM test")->queryAll();
+//        var_dump($post);
+        var_dump($post);
         return $this->render('index');
     }
 
