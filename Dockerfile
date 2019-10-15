@@ -9,13 +9,13 @@ RUN apt-get update && apt-get install -y tzdata \
 && echo Europe/Kiev > /etc/timezone \
 && apt-get install -y nginx \
 && apt-get install -y php7.2-fpm \
-&& apt-get install sqlite php7.2-sqlite \
+&& apt-get install -y sqlite php7.2-sqlite \
 && apt-get install -y git \
 && mkdir -p /root/.ssh \
 && chmod 700 /root/.ssh/id_rsa \
 && echo "Host github.com\n\tStrictHostKeyChecking no\n" >> /root/.ssh/config \
 && git clone git@github.com:5924737/node1.git /var/www/min \
-&& chmod -R 777 /var/www/min/web \
+&& chmod -R 777 /var/www/min/web
 && chmod -R 777 /var/www/min/sqllite
 #RUN apt-get install -y nano
 
