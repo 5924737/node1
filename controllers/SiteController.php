@@ -66,6 +66,8 @@ class SiteController extends Controller
         $post = Yii::$app->dbl->createCommand("SELECT * FROM test")->queryAll();
 //        var_dump($post);
         var_dump($post);
+        var_dump($post);
+        echo 'node3';
         return $this->render('index');
     }
 
