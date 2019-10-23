@@ -28,7 +28,7 @@ RUN rm -rf /root/.ssh/ \
 
 EXPOSE 80
 WORKDIR /var/www/min
-CMD service nginx start \
-&& service php7.2-fpm start \
-&& tail -f /dev/null
+CMD service php7.2-fpm start \
+&& nginx -g 'daemon off;' \
+&& service nginx start
 # docker run -ti -p1234:80 -v /etc/:/rrr/ --restart unless-stopped b8521afa74af
