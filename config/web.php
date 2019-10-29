@@ -43,7 +43,7 @@ $config = [
                 ],
             ],
         ],
-//        'db' => $db,
+        'db' => $db,
         'dbl' => $dbl,
         /*
         'urlManager' => [

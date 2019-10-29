@@ -22,7 +22,6 @@ RUN apt-get update && apt-get install -y tzdata \
 
 ADD image/default /etc/nginx/sites-available/default
 ADD image/htpasswd /etc/nginx/htpasswd
-
 RUN rm -rf /root/.ssh/ \
 && rm -rf /var/www/min/image \
 && rm -f /var/www/min/Dockerfile
