@@ -63,10 +63,10 @@ class SiteController extends Controller
     {
 //        $post = Yii::$app->dbl->createCommand('CREATE table test (id, string, ctime)')->execute();
 //        $post = Yii::$app->dbl->createCommand("INSERT INTO test VALUES('1', 'string', 'ctime')")->execute();
-        $post = Yii::$app->dbl->createCommand("SELECT * FROM test")->queryAll();
+//        $post = Yii::$app->dbl->createCommand("SELECT * FROM test")->queryAll();
         $post = Yii::$app->db->createCommand("SELECT * FROM test")->queryAll();
 //        var_dump($post);
-        var_dump($post);
+        var_dump($post);die();
         return $this->render('index');
     }
 
