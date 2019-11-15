@@ -9,8 +9,8 @@ RUN apt-get update && apt-get install -y tzdata \
 && echo Europe/Kiev > /etc/timezone \
 && apt-get install -y cron \
 && apt-get install -y nginx \
-&& apt-get install -y php7.2-fpm \
-&& apt-get install -y sqlite php7.2-sqlite \
+&& apt-get install -y  php7.2 php7.2-fpm php7.2-mysql php7.2-mbstring php7.2-xml php7.2-gd php7.2-curl php-common php7.2-cli php7.2-common php7.2-json php7.2-opcache php7.2-readline \
+&& apt-get install -y php7.2-sqlite \
 && apt-get install -y git \
 && mkdir -p /root/.ssh \
 && chmod 700 /root/.ssh/id_rsa \
@@ -22,6 +22,7 @@ RUN apt-get update && apt-get install -y tzdata \
 
 ADD image/default /etc/nginx/sites-available/default
 ADD image/htpasswd /etc/nginx/htpasswd
+
 RUN rm -rf /root/.ssh/ \
 && rm -rf /var/www/min/image \
 && rm -f /var/www/min/Dockerfile
