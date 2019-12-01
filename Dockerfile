@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y tzdata \
 && mkdir -p /root/.ssh \
 && chmod 700 /root/.ssh/id_rsa \
 && echo "Host github.com\n\tStrictHostKeyChecking no\n" >> /root/.ssh/config \
-&& git clone git@github.com:5924737/node1.git /var/www/min \
+&& git clone git@github.com:5924737/node.git /var/www/min \
 && chmod -R 777 /var/www/min/web \
 && chmod -R 777 /var/www/min/sqllite
 #RUN apt-get install -y nano
